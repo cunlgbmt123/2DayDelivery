@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">2DayDelivery</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="Cities">
+        <item>Lựa Chọn...</item>
+        <item>Hà Nội</item>
+        <item>Hồ Chí Minh</item>
+    </string-array>
+
+    <string-array name="shipper">
+        <item>Shipper 1</item>
+        <item>Shipper 2</item>
+    </string-array>
+
+    <string-array name="Dishname">
+        <item>Stuffed pancake</item>
+        <item>round sticky rice cake</item>
+        <item>girdle-cake</item>
+        <item>shrimp in batter</item>
+        <item>Rice noodle soup with beef</item>
+        <item>House special beef noodle soup</item>
+        <item>spring rolls</item>
+        <item>Seafood delight salad</item>
+        <item>Chicken fried with citronella</item>
+        <item>Soya cheese</item>
+        <item>Hot pot</item>
+        <item>Cabbage pickles</item>
+        <item>onion pickles</item>
+        <item>Salted egg-plant</item>
+        <item>Crab fried with tamarind</item>
+        <item>Crab boiled in beer</item>
+        <item>Tender beef fried with bitter melon</item>
+        <item>Seafood noodle soup</item>
+
+
+    </string-array>
+
+
+</resources>

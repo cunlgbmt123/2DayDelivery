@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "14464441996",
+    "firebase_url": "https://fooddelivery-a7226-default-rtdb.firebaseio.com",
+    "project_id": "fooddelivery-a7226",
+    "storage_bucket": "fooddelivery-a7226.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14464441996:android:e154551732f895081f25a9",
+        "android_client_info": {
+          "package_name": "com.example.a2daydelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14464441996-pm1f5n4dkpf6gm2mv34rfpkbn9ii0756.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a2daydelivery",
+            "certificate_hash": "c9c2e6a6ac35ea7733f755699d0e86246de8b484"
+          }
+        },
+        {
+          "client_id": "14464441996-nk0lfq0gk5bk8sl46m4oelqsfepvjh3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-3qJjO3Hw_3tCKatDCW9T0I-Y9nz8_eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14464441996-nk0lfq0gk5bk8sl46m4oelqsfepvjh3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14464441996:android:c8ab2faca00f0a921f25a9",
+        "android_client_info": {
+          "package_name": "com.example.fooddelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14464441996-nk0lfq0gk5bk8sl46m4oelqsfepvjh3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-3qJjO3Hw_3tCKatDCW9T0I-Y9nz8_eQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14464441996-nk0lfq0gk5bk8sl46m4oelqsfepvjh3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
