@@ -1,19 +1,17 @@
 package com.example.a2daydelivery;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class ChooseOne extends AppCompatActivity {
 
-    Button Chef,Customer,DeliveryPerson;
+    Button Chef,Customer,Shipper;
     Intent intent;
     String type;
     ConstraintLayout bgimage;
@@ -50,7 +48,7 @@ public class ChooseOne extends AppCompatActivity {
         type = intent.getStringExtra("Home").toString().trim();
 
         Chef = (Button)findViewById(R.id.chef);
-        DeliveryPerson = (Button)findViewById(R.id.delivery);
+        Shipper = (Button)findViewById(R.id.delivery);
         Customer = (Button)findViewById(R.id.customer);
 
 
@@ -96,7 +94,7 @@ public class ChooseOne extends AppCompatActivity {
             }
         });
 
-        DeliveryPerson.setOnClickListener(new View.OnClickListener() {
+        Shipper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -111,7 +109,7 @@ public class ChooseOne extends AppCompatActivity {
                     finish();
                 }
                 if(type.equals("SignUp")){
-                    Intent Registerdelivery  = new Intent(ChooseOne.this,Shipper_Registration.class);
+                    Intent Registerdelivery  = new Intent(ChooseOne.this,ShipperRegistration.class);
                     startActivity(Registerdelivery);
                 }
 

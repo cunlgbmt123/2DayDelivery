@@ -9,10 +9,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".ChefVerifyPhone"></activity>
-        <activity android:name=".Shipper_Registration" />
-        <activity android:name=".Shipper_Loginphone" />
+        <activity android:name=".cheffoodpanel.UpdateDelete_Dish"></activity>
+        <activity android:name=".ShipperRegistration" />
+        <activity android:name=".ShipperFoodPanel_BottomNavigation" />
+        <activity android:name=".CustomerFoodPanelNavigation" />
+        <activity android:name=".cheffoodpanel.ChefpostDish" />
+        <activity android:name=".ShipperForgotPassword" />
         <activity android:name=".Shipper_Login" />
+        <activity android:name=".Shipper_Registrantion" />
+        <activity android:name=".ChefForgotPassword" />
+        <activity android:name=".ChefFoodPanel_BottomNavigation" />
+        <activity android:name=".VerifyPhone" />
+        <activity android:name=".sendotp" />
+        <activity android:name=".ForgotPassword" />
+        <activity android:name=".Chefsendotp" />
+        <activity android:name=".ChefVerifyPhone" />
+        <activity android:name=".Shipper_Loginphone" />
         <activity android:name=".Registration" />
         <activity android:name=".Loginphone" />
         <activity android:name=".Login" />
@@ -21,6 +33,7 @@
         <activity android:name=".Cheflogin" />
         <activity android:name=".ChooseOne" />
         <activity android:name=".MainMenu" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

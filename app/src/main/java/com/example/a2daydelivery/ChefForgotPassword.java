@@ -1,14 +1,14 @@
 package com.example.a2daydelivery;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class Shipper_Registration extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ChefForgotPassword extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shipper__registration);
+        setContentView(R.layout.activity_chef_forgot_password);
     }
 }

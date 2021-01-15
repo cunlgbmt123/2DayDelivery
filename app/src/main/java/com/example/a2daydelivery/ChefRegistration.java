@@ -1,60 +1,44 @@
 package com.example.a2daydelivery;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.hbb20.CountryCodePicker;
-import com.example.a2daydelivery.ReusableCodeForAll;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
-
-import android.os.Bundle;
-import android.widget.Toast;
 
 public class ChefRegistration extends AppCompatActivity {
     String[] HN = {"Ba Đình", "BTL", "Cầu Giấy", "Đống Đa", "Hà Đông", "HBT", "Hoàn Kiếm", "Hoàng Mai", "Long Biên", "NTL", "Thanh Xuân", "Tây Hồ"};
     String[] HCM = {"Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Quận Bình Tân", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú", "Quận Thủ Đức"};
 
-    TextInputLayout Fname,Lname,Email,Pass,cpass,mobileno,houseno,area,pincode;
+    TextInputLayout Fname,Lname,Email,Pass,cpass,mobileno,houseno,ward,pincode;
     Spinner Cities,District;
     Button signup, Emaill, Phone;
     CountryCodePicker Cpp;
     FirebaseAuth FAuth;
-    ProgressBar progressBar;
-    FirebaseFirestore FStore;
-    String userID;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    String fname,lname,emailid,password,confpassword,mobile,house,Area,Pincode,cities,district;
+    String fname,lname,emailid,password,confpassword,mobile,house,Ward,Pincode,cities,district;
     String role="Chef";
     private String TAG;
 
@@ -73,7 +57,7 @@ public class ChefRegistration extends AppCompatActivity {
         pincode = (TextInputLayout) findViewById (R.id.Pincode);
         Cities = (Spinner) findViewById (R.id.City);
         District = (Spinner) findViewById (R.id.District);
-        area = (TextInputLayout) findViewById (R.id.Area);
+        ward = (TextInputLayout) findViewById (R.id.Ward);
 
         signup = (Button) findViewById (R.id.Signup);
         Emaill = (Button) findViewById (R.id.email);
@@ -139,9 +123,13 @@ public class ChefRegistration extends AppCompatActivity {
                 mobile = mobileno.getEditText().getText().toString().trim();
                 password = Pass.getEditText().getText().toString().trim();
                 confpassword = cpass.getEditText().getText().toString().trim();
-                Area = area.getEditText().getText().toString().trim();
+                Ward = ward.getEditText().getText().toString().trim();
                 house = houseno.getEditText().getText().toString().trim();
                 Pincode = pincode.getEditText().getText().toString().trim();
+
+                cities = Cities.getSelectedItem().toString().trim();
+                district = District.getSelectedItem().toString().trim();
+
 
                 if (isValid()){
                     final ProgressDialog mDialog = new ProgressDialog(ChefRegistration.this);
@@ -168,11 +156,11 @@ public class ChefRegistration extends AppCompatActivity {
                                         hashMap1.put("First Name",fname);
                                         hashMap1.put("Last Name",lname);
                                         hashMap1.put("EmailId",emailid);
-                                        hashMap1.put("City",district);
-                                        hashMap1.put("Area",Area);
+                                        hashMap1.put("District",district);
+                                        hashMap1.put("Ward",Ward);
                                         hashMap1.put("Password",password);
                                         hashMap1.put("Pincode",Pincode);
-                                        hashMap1.put("State",cities);
+                                        hashMap1.put("Cities",cities);
                                         hashMap1.put("Confirm Password",confpassword);
                                         hashMap1.put("House",house);
 
@@ -198,7 +186,7 @@ public class ChefRegistration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
-                                                                    Intent b = new Intent(ChefRegistration.this,ChefVerifyPhone.class);
+                                                                    Intent b = new Intent(ChefRegistration.this,MainMenu.class);
                                                                     b.putExtra("phonenumber",phonenumber);
                                                                     startActivity(b);
 
@@ -228,7 +216,7 @@ public class ChefRegistration extends AppCompatActivity {
 
     }
 
-    String emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    String emailpattern = "[a-zA-Z0-9._-]+@+[a-z]+\\.+[a-z]+";
     public boolean isValid(){
         Email.setErrorEnabled(false);
         Email.setError("");
@@ -242,8 +230,8 @@ public class ChefRegistration extends AppCompatActivity {
         mobileno.setError("");
         cpass.setErrorEnabled(false);
         cpass.setError("");
-        area.setErrorEnabled(false);
-        area.setError("");
+        ward.setErrorEnabled(false);
+        ward.setError("");
         houseno.setErrorEnabled(false);
         houseno.setError("");
         pincode.setErrorEnabled(false);
@@ -306,9 +294,9 @@ public class ChefRegistration extends AppCompatActivity {
                 isValidmobilenum = true;
             }
         }
-        if(TextUtils.isEmpty(Area)){
-            area.setErrorEnabled(true);
-            area.setError("Area Is Required");
+        if(TextUtils.isEmpty(Ward)){
+            ward.setErrorEnabled(true);
+            ward.setError("Ward Is Required");
         }else{
             isValidarea = true;
         }

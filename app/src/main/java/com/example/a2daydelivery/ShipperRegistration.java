@@ -27,7 +27,7 @@ import com.hbb20.CountryCodePicker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Registration extends AppCompatActivity {
+public class ShipperRegistration extends AppCompatActivity {
     String[] HN = {"Ba Đình", "BTL", "Cầu Giấy", "Đống Đa", "Hà Đông", "HBT", "Hoàn Kiếm", "Hoàng Mai", "Long Biên", "NTL", "Thanh Xuân", "Tây Hồ"};
     String[] HCM = {"Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Quận Bình Tân", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú", "Quận Thủ Đức"};
 
@@ -39,13 +39,13 @@ public class Registration extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     String fname,lname,emailid,password,confpassword,mobile,house,Ward,Pincode,cities,district;
-    String role="Customer";
+    String role="Shipper";
     private String TAG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_registration);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shipper_registration);
 
         Fname = (TextInputLayout) findViewById (R.id.Firstname);
         Lname = (TextInputLayout) findViewById (R.id.Lastname);
@@ -90,7 +90,7 @@ public class Registration extends AppCompatActivity {
                     for (String district : HN) {
                         list.add (district);
                     }
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (Registration.this, android.R.layout.simple_spinner_item, list);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (ShipperRegistration.this, android.R.layout.simple_spinner_item, list);
                     District.setAdapter (arrayAdapter);
                 }
                 if (district.equals ("Hồ Chí Minh")) {
@@ -98,7 +98,7 @@ public class Registration extends AppCompatActivity {
                     for (String district : HCM) {
                         list.add (district);
                     }
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (Registration.this, android.R.layout.simple_spinner_item, list);
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (ShipperRegistration.this, android.R.layout.simple_spinner_item, list);
                     District.setAdapter (arrayAdapter);
                 }
 
@@ -110,7 +110,7 @@ public class Registration extends AppCompatActivity {
 
             }
         });
-        databaseReference = firebaseDatabase.getInstance().getReference("Customer");
+        databaseReference = firebaseDatabase.getInstance().getReference("Shipper");
         FAuth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +132,7 @@ public class Registration extends AppCompatActivity {
 
 
                 if (isValid()){
-                    final ProgressDialog mDialog = new ProgressDialog(Registration.this);
+                    final ProgressDialog mDialog = new ProgressDialog(ShipperRegistration.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
                     mDialog.setMessage("Registration in progress please wait......");
@@ -164,7 +164,7 @@ public class Registration extends AppCompatActivity {
                                         hashMap1.put("Confirm Password",confpassword);
                                         hashMap1.put("House",house);
 
-                                        firebaseDatabase.getInstance().getReference("Customer")
+                                        firebaseDatabase.getInstance().getReference("Shipper")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -176,7 +176,7 @@ public class Registration extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<Void> task) {
 
                                                         if(task.isSuccessful()){
-                                                            AlertDialog.Builder builder = new AlertDialog.Builder(Registration.this);
+                                                            AlertDialog.Builder builder = new AlertDialog.Builder(ShipperRegistration.this);
                                                             builder.setMessage("You Have Registered! Make Sure To Verify Your Email");
                                                             builder.setCancelable(false);
                                                             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -186,7 +186,7 @@ public class Registration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
-                                                                    Intent b = new Intent(Registration.this,MainMenu.class);
+                                                                    Intent b = new Intent(ShipperRegistration.this,MainMenu.class);
                                                                     b.putExtra("phonenumber",phonenumber);
                                                                     startActivity(b);
 
@@ -196,7 +196,7 @@ public class Registration extends AppCompatActivity {
                                                             Alert.show();
                                                         }else{
                                                             mDialog.dismiss();
-                                                            ReusableCodeForAll.ShowAlert(Registration.this,"Error",task.getException().getMessage());
+                                                            ReusableCodeForAll.ShowAlert(ShipperRegistration.this,"Error",task.getException().getMessage());
                                                         }
                                                     }
                                                 });
