@@ -16,7 +16,6 @@
         <activity android:name=".cheffoodpanel.ChefpostDish" />
         <activity android:name=".ShipperForgotPassword" />
         <activity android:name=".Shipper_Login" />
-        <activity android:name=".Shipper_Registrantion" />
         <activity android:name=".ChefForgotPassword" />
         <activity android:name=".ChefFoodPanel_BottomNavigation" />
         <activity android:name=".VerifyPhone" />

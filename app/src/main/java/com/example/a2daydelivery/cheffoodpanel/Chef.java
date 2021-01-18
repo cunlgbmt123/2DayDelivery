@@ -16,16 +16,16 @@ public class Chef {
         Postcode = postcode;
         City = city;
     }
+    public Chef(){
 
-    public Chef() {
     }
 
     public String getWard() {
         return Ward;
     }
 
-    public String getCity() {
-        return City;
+    public String getDistrict() {
+        return District;
     }
 
     public String getConfirmPassword() {
@@ -60,7 +60,7 @@ public class Chef {
         return Postcode;
     }
 
-    public String getDistrict() {
-        return District;
+    public String getCity() {
+        return City;
     }
 }

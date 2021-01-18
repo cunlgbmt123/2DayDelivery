@@ -43,6 +43,20 @@ import java.util.UUID;
 
 public class ChefpostDish extends AppCompatActivity {
 
+//    ImageButton imageButton;
+//    Button post_dish;
+//    Spinner Dishes;
+//    TextInputLayout desc,amt,pri;
+//    String descrption,amount,price,dishes;
+//    Uri imageuri;
+//    private Uri mcropimageuri;
+//    FirebaseStorage storage;
+//    StorageReference storageReference;
+//    FirebaseDatabase firebaseDatabase;
+//    DatabaseReference databaseReference,dataa;
+//    FirebaseAuth Fauth;
+//    StorageReference ref;
+//    String ChefId , RandomUID , City, District , Ward;
     ImageButton imageButton;
     Button post_dish;
     Spinner Dishes;
@@ -57,11 +71,11 @@ public class ChefpostDish extends AppCompatActivity {
     FirebaseAuth Fauth;
     StorageReference ref;
     String ChefId , RandomUID , City, District , Ward;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chefpost_dish);
-
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
@@ -70,8 +84,6 @@ public class ChefpostDish extends AppCompatActivity {
         amt = (TextInputLayout) findViewById(R.id.Amount);
         pri = (TextInputLayout) findViewById(R.id.price);
         post_dish = (Button) findViewById(R.id.post);
-
-
         Fauth = FirebaseAuth.getInstance();
         databaseReference = firebaseDatabase.getInstance().getReference("FoodDetails");
 
@@ -82,18 +94,19 @@ public class ChefpostDish extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    Chef chef = snapshot.getValue(Chef.class);
-                    City = chef.getCity();
-                    District = chef.getDistrict();
-                    Ward = chef.getWard();
-                    imageButton = (ImageButton) findViewById(R.id.image_upload);
+                    Chef cheff = snapshot.getValue(Chef.class);
+                    District = cheff.getDistrict();
+                    City = cheff.getCity();
+                    Ward = cheff.getWard();
 
+                    imageButton = (ImageButton) findViewById(R.id.image_upload);
                     imageButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             onSelectImageclick(v);
                         }
                     });
+
                     post_dish.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -108,7 +121,6 @@ public class ChefpostDish extends AppCompatActivity {
                         }
                     });
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
@@ -136,7 +148,7 @@ public class ChefpostDish extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             FoodDetails info = new FoodDetails(dishes,amount,price,descrption,String.valueOf(uri),RandomUID,ChefId);
-                            firebaseDatabase.getInstance().getReference("FoodDetails").child(City).child(District).child(Ward).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUID)
+                            firebaseDatabase.getInstance().getReference("FoodDetails").child(District).child(City).child(Ward).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUID)
                                     .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -222,7 +234,7 @@ public class ChefpostDish extends AppCompatActivity {
     @SuppressLint("NewApi")
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if(requestCode== CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode== Activity.RESULT_OK){
+        if(requestCode==CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode== Activity.RESULT_OK){
             imageuri = CropImage.getPickImageResultUri(this,data);
             if(CropImage.isReadExternalStoragePermissionsRequired(this,imageuri)){
                 mcropimageuri = imageuri;
