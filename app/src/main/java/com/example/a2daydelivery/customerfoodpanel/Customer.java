@@ -1,50 +1,42 @@
 package com.example.a2daydelivery.customerfoodpanel;
 
-public class Customer{
-    private String City,FirstName,LastName,Password,ConfirmPassword,EmailId,MobileNo,District,Ward,LocalAddress;
+public class Customer {
 
-   public Customer(String city, String firstName, String lastName, String password, String confirmPassword, String emailId, String mobileNo, String district, String ward, String localAddress){
-       this.City = city;
-       FirstName = firstName;
-       LastName = lastName;
-       Password = password;
-       ConfirmPassword = confirmPassword;
-       EmailId = emailId;
-       MobileNo = mobileNo;
-       District = district;
-       Ward = ward;
-       LocalAddress = localAddress;
-   }
+    private String Area, City, ConfirmPassword, Emailid, Fname, House, Lname, Mobile, Password, Postcode, State;
+
+
+
+
+    public Customer(String area, String city, String confirmPassword, String emailid, String fname, String house, String lname, String mobile, String password, String postcode, String state) {
+        this.Area = area;
+        this.City = city;
+        this.ConfirmPassword = confirmPassword;
+        this.Emailid = emailid;
+        this.Fname = fname;
+        this.House = house;
+        this.Lname = lname;
+        this.Mobile = mobile;
+        this.Password = password;
+        this.Postcode = postcode;
+        this.State = state;
+    }
+    public Customer() {
+    }
+
+    public String getArea() {
+        return Area;
+    }
+
+    public void setArea(String area) {
+        Area = area;
+    }
+
     public String getCity() {
         return City;
     }
 
     public void setCity(String city) {
-        this.City = city;
-    }
-
-    public String getFirstName() {
-        return FirstName;
-    }
-
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-    public String getLastName() {
-        return LastName;
-    }
-
-    public void setLastName(String lastName) {
-        LastName = lastName;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
+        City = city;
     }
 
     public String getConfirmPassword() {
@@ -55,44 +47,67 @@ public class Customer{
         ConfirmPassword = confirmPassword;
     }
 
-    public String getEmailId() {
-        return EmailId;
+    public String getEmailid() {
+        return Emailid;
     }
 
-    public void setEmailId(String emailId) {
-        EmailId = emailId;
+    public void setEmailid(String emailid) {
+        Emailid = emailid;
     }
 
-    public String getMobileNo() {
-        return MobileNo;
+    public String getFname() {
+        return Fname;
     }
 
-    public void setMobileNo(String mobileNo) {
-        MobileNo = mobileNo;
+    public void setFname(String fname) {
+        Fname = fname;
     }
 
-    public String getDistrict() {
-        return District;
+    public String getHouse() {
+        return House;
     }
 
-    public void setDistrict(String district) {
-        District = district;
+    public void setHouse(String house) {
+        House = house;
     }
 
-    public String getWard() {
-        return Ward;
+    public String getLname() {
+        return Lname;
     }
 
-    public void setWard(String ward) {
-        Ward = ward;
+    public void setLname(String lname) {
+        Lname = lname;
     }
 
-    public String getLocalAddress() {
-        return LocalAddress;
+    public String getMobile() {
+        return Mobile;
     }
 
-    public void setLocalAddress(String localAddress) {
-        LocalAddress = localAddress;
+    public void setMobile(String mobile) {
+        Mobile = mobile;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public String getPostcode() {
+        return Postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        Postcode = postcode;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public void setState(String state) {
+        State = state;
     }
 }
-

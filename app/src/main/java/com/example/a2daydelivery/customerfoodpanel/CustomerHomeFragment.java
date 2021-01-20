@@ -1,141 +1,82 @@
 package com.example.a2daydelivery.customerfoodpanel;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.example.a2daydelivery.MainMenu;
+import com.example.a2daydelivery.CustomerFoodPanelNavigation;
 import com.example.a2daydelivery.R;
-import com.example.a2daydelivery.UpdateFood;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerHomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    RecyclerView recyclerView;
-    private List<UpdateFood> updateFoodList;
-    private CustomerHomeAdapter adapter;
-    String City,District,Ward;
-    DatabaseReference dataa,databaseReference;
-    SwipeRefreshLayout swipeRefreshLayout;
+public class CustomerHomeFragment extends Fragment {
+    private CustomerFoodPanelNavigation customerFoodPanelNavigation;
+    private RecyclerView rcvItem;
+    private View mview;
+    private Adapter adapter;
 
-    @Nullable
+    public CustomerHomeFragment() {
+
+    }
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_customerhome, null);
-        getActivity().setTitle("Home");
-        recyclerView = v.findViewById(R.id.recycle_menu);
-        recyclerView.setHasFixedSize(true);
-        Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.move);
-        recyclerView.startAnimation(animation);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        updateFoodList = new ArrayList<>();
-        swipeRefreshLayout = (SwipeRefreshLayout)v.findViewById(R.id.swipelayout);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimaryDark,R.color.Red);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        swipeRefreshLayout.post(new Runnable() {
+        mview = inflater.inflate(R.layout.fragment_customerhome, container, false);
+        this.getActivity().setTitle("Home");
+        customerFoodPanelNavigation = (CustomerFoodPanelNavigation) getActivity();
+        rcvItem = mview.findViewById(R.id.recycle_menu);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(customerFoodPanelNavigation);
+
+        rcvItem.setLayoutManager(linearLayoutManager);
+
+        adapter = new Adapter();
+        adapter.setData(getListItem(), new Adapter.Clickaddtocard() {
             @Override
-            public void run() {
-                swipeRefreshLayout.setRefreshing(true);
-                String  userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                dataa = FirebaseDatabase.getInstance().getReference("Customer").child(userid);
-                dataa.addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onClickaddtocard(ImageView imgaddtocard, Item item) {
+                Animation.translateAnimation(customerFoodPanelNavigation.getViewAnimation(), imgaddtocard, customerFoodPanelNavigation.getViewEndAnimation(), new android.view.animation.Animation.AnimationListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    public void onAnimationStart(android.view.animation.Animation animation) {
 
-                        Customer custo = snapshot.getValue(Customer.class);
-
-                        City = custo.getCity();
-                        District = custo.getDistrict();
-                        Ward = custo.getWard();
-                        customermenu();
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                    public void onAnimationEnd(android.view.animation.Animation animation) {
+                        item.setAddtocard(true);
+                        imgaddtocard.setBackgroundResource(R.color.gray);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(android.view.animation.Animation animation) {
 
                     }
                 });
             }
         });
+        rcvItem.setAdapter(adapter);
 
-
-        return v;
+        return mview;
     }
 
-    @Override
-    public void onRefresh() {
-        customermenu();
-    }
+    private List<Item> getListItem(){
+        List<Item> list = new ArrayList<>();
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
 
-    private void customermenu() {
-
-        swipeRefreshLayout.setRefreshing(true);
-        databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetails").child(City).child(District).child(Ward);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                updateFoodList.clear();
-                for (DataSnapshot snapshot1 : snapshot.getChildren()){
-                    for(DataSnapshot snapshot2 : snapshot1.getChildren()){
-                        UpdateFood updateDishModel = snapshot2.getValue(UpdateFood.class);
-                        updateFoodList.add(updateDishModel);
-                    }
-                }
-                adapter = new CustomerHomeAdapter(getContext(),updateFoodList);
-                recyclerView.setAdapter(adapter);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                swipeRefreshLayout.setRefreshing(false);
-
-            }
-        });
-
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.logout, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int idd = item.getItemId();
-        if (idd == R.id.LOGOUT){
-            Logout();
-            return  true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void Logout() {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(getActivity(), MainMenu.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
+        return list;
     }
 }

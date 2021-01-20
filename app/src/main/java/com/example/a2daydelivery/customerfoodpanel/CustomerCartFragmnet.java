@@ -11,12 +11,15 @@ import androidx.fragment.app.Fragment;
 
 import com.example.a2daydelivery.R;
 
-public class CustomerCartFragment extends Fragment {
+
+public class CustomerCartFragmnet extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_customercart, null);
+        View v = inflater.inflate(R.layout.fragment_customercart, null);
         getActivity().setTitle("Cart");
-        return view;
+        return v;
     }
+
 }

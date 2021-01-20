@@ -17,11 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
@@ -69,36 +64,20 @@ public class Login extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     mDialog.dismiss();
 
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid() + "/Role");
-                                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            String role = snapshot.getValue(String.class);
+                                    if(Fauth.getCurrentUser().isEmailVerified()){
+                                        mDialog.dismiss();
+                                        Toast.makeText(Login.this, "Congratulation! You Have Successfully Login", Toast.LENGTH_SHORT).show();
+                                        Intent Z = new Intent(Login.this,CustomerFoodPanelNavigation.class);
+                                        startActivity(Z);
+                                        finish();
 
-                                            if (Fauth.getCurrentUser().isEmailVerified() && role.equals("Customer")) {
-                                                mDialog.dismiss();
-                                                Toast.makeText(Login.this, "Congratulation! You Have Successfully Login", Toast.LENGTH_SHORT).show();
-                                                Intent Z = new Intent(Login.this, CustomerFoodPanelNavigation.class);
-                                                startActivity(Z);
-                                                finish();
+                                    }else{
+                                        ReusableCodeForAll.ShowAlert(Login.this,"Verification Failed","You Have Not Verified Your Email");
 
-                                            } else {
-                                                ReusableCodeForAll.ShowAlert(Login.this, "Verification Failed", "You Are Not Customer Or You Have Not Verified Your Email");
-
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }else
-
-                                {
+                                    }
+                                }else{
                                     mDialog.dismiss();
-                                    ReusableCodeForAll.ShowAlert(Login.this, "Error", task.getException().getMessage());
-
+                                    ReusableCodeForAll.ShowAlert(Login.this,"Error",task.getException().getMessage());
                                 }
                             }
                         });

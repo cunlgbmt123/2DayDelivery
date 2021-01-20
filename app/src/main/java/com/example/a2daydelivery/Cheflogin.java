@@ -17,11 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Cheflogin extends AppCompatActivity {
 
@@ -69,36 +64,20 @@ public class Cheflogin extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     mDialog.dismiss();
 
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("User").child(FirebaseAuth.getInstance().getUid() + "/Role");
-                                    databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            String role = snapshot.getValue(String.class);
+                                    if(Fauth.getCurrentUser().isEmailVerified()){
+                                        mDialog.dismiss();
+                                        Toast.makeText(Cheflogin.this, "Congratulation! You Have Successfully Login", Toast.LENGTH_SHORT).show();
+                                        Intent Z = new Intent(Cheflogin.this,ChefFoodPanel_BottomNavigation.class);
+                                        startActivity(Z);
+                                        finish();
 
-                                            if (Fauth.getCurrentUser().isEmailVerified() && role.equals("Chef")) {
-                                                mDialog.dismiss();
-                                                Toast.makeText(Cheflogin.this, "Congratulation! You Have Successfully Login", Toast.LENGTH_SHORT).show();
-                                                Intent Z = new Intent(Cheflogin.this, ChefFoodPanel_BottomNavigation.class);
-                                                startActivity(Z);
-                                                finish();
+                                    }else{
+                                        ReusableCodeForAll.ShowAlert(Cheflogin.this,"Verification Failed","You Have Not Verified Your Email");
 
-                                            } else {
-                                                ReusableCodeForAll.ShowAlert(Cheflogin.this, "Verification Failed", "You Are Not Chef Or You Have Not Verified Your Email");
-
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
-                                }else
-
-                                {
+                                    }
+                                }else{
                                     mDialog.dismiss();
-                                    ReusableCodeForAll.ShowAlert(Cheflogin.this, "Error", task.getException().getMessage());
-
+                                    ReusableCodeForAll.ShowAlert(Cheflogin.this,"Error",task.getException().getMessage());
                                 }
                             }
                         });

@@ -17,8 +17,11 @@ import com.example.a2daydelivery.R;
 
 
 public class ChefProfileFragment extends Fragment {
+
     Button postDish;
-    ConstraintLayout bgrimg;
+    ConstraintLayout backimg;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,8 +47,8 @@ public class ChefProfileFragment extends Fragment {
         animationDrawable.setEnterFadeDuration(850);
         animationDrawable.setExitFadeDuration(1600);
 
-        bgrimg = v.findViewById(R.id.back1);
-        bgrimg.setBackgroundDrawable(animationDrawable);
+        backimg = v.findViewById(R.id.back1);
+        backimg.setBackgroundDrawable(animationDrawable);
         animationDrawable.start();
 
         postDish =  (Button)v.findViewById(R.id.post_dish);
@@ -53,7 +56,7 @@ public class ChefProfileFragment extends Fragment {
         postDish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(),ChefpostDish.class));
+                startActivity(new Intent(getContext(),Chef_postDish.class));
             }
         });
 

@@ -28,48 +28,65 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ShipperRegistration extends AppCompatActivity {
-    String[] HN = {"Ba Đình", "BTL", "Cầu Giấy", "Đống Đa", "Hà Đông", "HBT", "Hoàn Kiếm", "Hoàng Mai", "Long Biên", "NTL", "Thanh Xuân", "Tây Hồ"};
-    String[] HCM = {"Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Quận Bình Tân", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú", "Quận Thủ Đức"};
 
-    TextInputLayout Fname,Lname,Email,Pass,cpass,mobileno,houseno,ward,pincode;
-    Spinner Cities,District;
+    String[] Maharashtra = {"Mumbai","Pune","Nashik"};
+    String[] Madhyapradesh = {"Bhopal","Indore","Ujjain"};
+
+    TextInputLayout Fname,Lname,Email,Pass,cpass,mobileno,houseno,area,pincode;
+    Spinner Statespin,Cityspin;
     Button signup, Emaill, Phone;
     CountryCodePicker Cpp;
     FirebaseAuth FAuth;
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
-    String fname,lname,emailid,password,confpassword,mobile,house,Ward,Pincode,cities,district;
+    String fname,lname,emailid,password,confpassword,mobile,house,Area,Pincode,statee,cityy;
     String role="Shipper";
-    private String TAG;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipper_registration);
 
-        Fname = (TextInputLayout) findViewById (R.id.Firstname);
-        Lname = (TextInputLayout) findViewById (R.id.Lastname);
-        Email = (TextInputLayout) findViewById (R.id.Email);
-        Pass = (TextInputLayout) findViewById (R.id.Pwd);
-        cpass = (TextInputLayout) findViewById (R.id.Cpass);
-        mobileno = (TextInputLayout) findViewById (R.id.Mobileno);
-        houseno = (TextInputLayout) findViewById (R.id.houseNo);
-        pincode = (TextInputLayout) findViewById (R.id.Pincode);
-        Cities = (Spinner) findViewById (R.id.City);
-        District = (Spinner) findViewById (R.id.District);
-        ward = (TextInputLayout) findViewById (R.id.Ward);
+        Fname = (TextInputLayout)findViewById(R.id.fname);
+        Lname = (TextInputLayout)findViewById(R.id.lname);
+        Email = (TextInputLayout)findViewById(R.id.Emailid);
+        Pass = (TextInputLayout)findViewById(R.id.password);
+        cpass = (TextInputLayout)findViewById(R.id.confirmpassword);
+        mobileno = (TextInputLayout)findViewById(R.id.mobileno);
+        houseno = (TextInputLayout)findViewById(R.id.Houseno);
+        pincode = (TextInputLayout)findViewById(R.id.Pincodee);
+        Statespin = (Spinner) findViewById(R.id.State);
+        Cityspin = (Spinner) findViewById(R.id.City);
+        area = (TextInputLayout)findViewById(R.id.Areaa);
 
-        signup = (Button) findViewById (R.id.Signup);
-        Emaill = (Button) findViewById (R.id.email);
-        Phone = (Button) findViewById (R.id.phone);
+        signup = (Button)findViewById(R.id.Signupp);
+        Emaill = (Button)findViewById(R.id.emaillid);
+        Phone = (Button)findViewById(R.id.Phonenumber);
 
-        Cpp = (CountryCodePicker) findViewById (R.id.CountryCode);
+        Cpp = (CountryCodePicker)findViewById(R.id.ctrycode);
 
-
-        Cities.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener () {
+        Statespin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
+                Object value = parent.getItemAtPosition(position);
+                statee = value.toString().trim();
+                if(statee.equals("Maharashtra")){
+                    ArrayList<String> list = new ArrayList<>();
+                    for (String cities : Maharashtra){
+                        list.add(cities);
+                    }
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ShipperRegistration.this,android.R.layout.simple_spinner_item,list);
+                    Cityspin.setAdapter(arrayAdapter);
+                }
+                if(statee.equals("Madhyapradesh")){
+                    ArrayList<String> list = new ArrayList<>();
+                    for (String cities : Madhyapradesh){
+                        list.add(cities);
+                    }
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ShipperRegistration.this,android.R.layout.simple_spinner_item,list);
+                    Cityspin.setAdapter(arrayAdapter);
+                }
 
             }
 
@@ -78,30 +95,12 @@ public class ShipperRegistration extends AppCompatActivity {
 
             }
         });
-        District.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener () {
+
+        Cityspin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Object value = parent.getItemAtPosition (position);
-                district = value.toString ().trim ();
-
-                if (district.equals ("Hà Nội")) {
-
-                    ArrayList<String> list = new ArrayList<> ();
-                    for (String district : HN) {
-                        list.add (district);
-                    }
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (ShipperRegistration.this, android.R.layout.simple_spinner_item, list);
-                    District.setAdapter (arrayAdapter);
-                }
-                if (district.equals ("Hồ Chí Minh")) {
-                    ArrayList<String> list = new ArrayList<> ();
-                    for (String district : HCM) {
-                        list.add (district);
-                    }
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String> (ShipperRegistration.this, android.R.layout.simple_spinner_item, list);
-                    District.setAdapter (arrayAdapter);
-                }
-
+                Object value = parent.getItemAtPosition(position);
+                cityy = value.toString().trim();
 
             }
 
@@ -110,26 +109,22 @@ public class ShipperRegistration extends AppCompatActivity {
 
             }
         });
-        databaseReference = firebaseDatabase.getInstance().getReference("Shipper");
+
+        databaseReference = firebaseDatabase.getInstance().getReference("Chef");
         FAuth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 fname = Fname.getEditText().getText().toString().trim();
                 lname = Lname.getEditText().getText().toString().trim();
                 emailid = Email.getEditText().getText().toString().trim();
                 mobile = mobileno.getEditText().getText().toString().trim();
                 password = Pass.getEditText().getText().toString().trim();
                 confpassword = cpass.getEditText().getText().toString().trim();
-                Ward = ward.getEditText().getText().toString().trim();
+                Area = area.getEditText().getText().toString().trim();
                 house = houseno.getEditText().getText().toString().trim();
                 Pincode = pincode.getEditText().getText().toString().trim();
-
-                cities = Cities.getSelectedItem().toString().trim();
-                district = District.getSelectedItem().toString().trim();
-
 
                 if (isValid()){
                     final ProgressDialog mDialog = new ProgressDialog(ShipperRegistration.this);
@@ -156,11 +151,11 @@ public class ShipperRegistration extends AppCompatActivity {
                                         hashMap1.put("First Name",fname);
                                         hashMap1.put("Last Name",lname);
                                         hashMap1.put("EmailId",emailid);
-                                        hashMap1.put("District",district);
-                                        hashMap1.put("Ward",Ward);
+                                        hashMap1.put("City",cityy);
+                                        hashMap1.put("Area",Area);
                                         hashMap1.put("Password",password);
                                         hashMap1.put("Pincode",Pincode);
-                                        hashMap1.put("Cities",cities);
+                                        hashMap1.put("State",statee);
                                         hashMap1.put("Confirm Password",confpassword);
                                         hashMap1.put("House",house);
 
@@ -186,7 +181,7 @@ public class ShipperRegistration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile;
-                                                                    Intent b = new Intent(ShipperRegistration.this,MainMenu.class);
+                                                                    Intent b = new Intent(ShipperRegistration.this,Shipper_verifyphone.class);
                                                                     b.putExtra("phonenumber",phonenumber);
                                                                     startActivity(b);
 
@@ -206,17 +201,34 @@ public class ShipperRegistration extends AppCompatActivity {
 
                                     }
                                 });
+                            }else{
+                                mDialog.dismiss();
+                                ReusableCodeForAll.ShowAlert(ShipperRegistration.this,"Error",task.getException().getMessage());
+
                             }
                         }
                     });
                 }
-//
             }
         });
 
-    }
+        Emaill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-    String emailpattern = "[a-zA-Z0-9._-]+@+[a-z]+\\.+[a-z]+";
+                startActivity(new Intent(ShipperRegistration.this,Shipper_Login.class));
+                finish();
+            }
+        });
+        Phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ShipperRegistration.this,Shipper_Loginphone.class));
+                finish();
+            }
+        });
+    }
+    String emailpattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public boolean isValid(){
         Email.setErrorEnabled(false);
         Email.setError("");
@@ -230,8 +242,8 @@ public class ShipperRegistration extends AppCompatActivity {
         mobileno.setError("");
         cpass.setErrorEnabled(false);
         cpass.setError("");
-        ward.setErrorEnabled(false);
-        ward.setError("");
+        area.setErrorEnabled(false);
+        area.setError("");
         houseno.setErrorEnabled(false);
         houseno.setError("");
         pincode.setErrorEnabled(false);
@@ -294,9 +306,9 @@ public class ShipperRegistration extends AppCompatActivity {
                 isValidmobilenum = true;
             }
         }
-        if(TextUtils.isEmpty(Ward)){
-            ward.setErrorEnabled(true);
-            ward.setError("Ward Is Required");
+        if(TextUtils.isEmpty(Area)){
+            area.setErrorEnabled(true);
+            area.setError("Area Is Required");
         }else{
             isValidarea = true;
         }

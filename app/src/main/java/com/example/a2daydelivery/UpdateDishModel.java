@@ -1,13 +1,22 @@
 package com.example.a2daydelivery;
 
-public class UpdateFood {
-    String Dishes;
-    String RandomUID;
-    String Description;
-    String Amount;
-    String Price;
-    String ImageURL;
-    String ChefId;
+public class UpdateDishModel {
+
+    String Dishes, RandomUID, Description, Quantity, Price, ImageURL, ChefId;
+
+    public UpdateDishModel(String dishes, String randomUID, String description, String quantity, String price, String imageURL, String chefId) {
+        this.Dishes = dishes;
+        RandomUID = randomUID;
+        Description = description;
+        Quantity = quantity;
+        Price = price;
+        ImageURL = imageURL;
+        ChefId = chefId;
+    }
+
+    public UpdateDishModel() {
+
+    }
 
     public String getDishes() {
         return Dishes;
@@ -33,12 +42,12 @@ public class UpdateFood {
         Description = description;
     }
 
-    public String getAmount() {
-        return Amount;
+    public String getQuantity() {
+        return Quantity;
     }
 
-    public void setAmount(String amount) {
-        Amount = amount;
+    public void setQuantity(String quantity) {
+        Quantity = quantity;
     }
 
     public String getPrice() {

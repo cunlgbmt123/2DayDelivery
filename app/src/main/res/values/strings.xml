@@ -1,14 +1,12 @@
 <resources>
-    <string name="app_name">2DayDelivery</string>
-
+    <string name="app_name">FoodOn</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string-array name="Cities">
-        <item>Lựa Chọn...</item>
-        <item>Hà Nội</item>
-        <item>Hồ Chí Minh</item>
+    <string-array name="State">
+        <item>Maharashtra</item>
+        <item>Gujarat</item>
     </string-array>
 
     <string-array name="shipper">
@@ -16,27 +14,47 @@
         <item>Shipper 2</item>
     </string-array>
 
-    <string-array name="Dishname">
-        <item>Stuffed pancake</item>
-        <item>round sticky rice cake</item>
-        <item>girdle-cake</item>
-        <item>shrimp in batter</item>
-        <item>Rice noodle soup with beef</item>
-        <item>House special beef noodle soup</item>
-        <item>spring rolls</item>
-        <item>Seafood delight salad</item>
-        <item>Chicken fried with citronella</item>
-        <item>Soya cheese</item>
-        <item>Hot pot</item>
-        <item>Cabbage pickles</item>
-        <item>onion pickles</item>
-        <item>Salted egg-plant</item>
-        <item>Crab fried with tamarind</item>
-        <item>Crab boiled in beer</item>
-        <item>Tender beef fried with bitter melon</item>
-        <item>Seafood noodle soup</item>
-
-
+    <string-array name="DishName">
+        <item>Thepla</item>
+        <item>Dal Rice</item>
+        <item>Dhokla</item>
+        <item>Sabji Roti</item>
+        <item>Kadhi Khichdi</item>
+        <item>Puri bhaji</item>
+        <item>Dal Dhokdi</item>
+        <item>Undhiyu</item>
+        <item>Aloo Paratha</item>
+        <item>Patra</item>
+        <item>Khandvi</item>
+        <item>Gulab Jamun</item>
+        <item>SevTomato bhakri</item>
+        <item>Shrikhand</item>
+        <item>Palak Paneer</item>
+        <item>Khulcha</item>
+        <item>Makki di roti</item>
+        <item>Gobi Partha</item>
+        <item>Biryani</item>
+        <item>Rajma</item>
+        <item>Bhindi Fry</item>
+        <item>Dum Biryani</item>
+        <item>Rumali roti</item>
+        <item>Dal Makhni</item>
+        <item>Samosa</item>
+        <item>Kachori</item>
+        <item>Menduwada</item>
+        <item>Pulav</item>
+        <item>Pav Bhaji</item>
+        <item>Misal Pav</item>
+        <item>Mix Vegetable</item>
+        <item>Muffins</item>
+        <item>DalFry JerraRice</item>
+        <item>Bengali sweet</item>
+        <item>Puranpoli</item>
+        <item>Egg Curry</item>
+        <item>Pomfret Fish</item>
+        <item>Egg Bhurji</item>
+        <item>Dum chicken</item>
+        <item>Hyderabadi Chicken Biryni</item>
     </string-array>
 
 

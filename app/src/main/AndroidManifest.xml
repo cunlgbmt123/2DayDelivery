@@ -9,11 +9,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".cheffoodpanel.UpdateDelete_Dish"></activity>
+        <activity android:name=".customerfoodpanel.OrderDish"></activity>
+        <activity android:name=".Shipper_sendotp" />
+        <activity android:name=".Shipper_verifyphone" />
+        <activity android:name=".cheffoodpanel.UpdateDelete_Dish" />
         <activity android:name=".ShipperRegistration" />
         <activity android:name=".ShipperFoodPanel_BottomNavigation" />
         <activity android:name=".CustomerFoodPanelNavigation" />
-        <activity android:name=".cheffoodpanel.ChefpostDish" />
+        <activity android:name=".cheffoodpanel.Chef_postDish" />
         <activity android:name=".ShipperForgotPassword" />
         <activity android:name=".Shipper_Login" />
         <activity android:name=".ChefForgotPassword" />

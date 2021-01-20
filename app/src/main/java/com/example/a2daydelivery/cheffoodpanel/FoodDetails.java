@@ -1,11 +1,13 @@
 package com.example.a2daydelivery.cheffoodpanel;
 
 public class FoodDetails {
-    public String Dishes,Amount,Price,Description,ImageURL,RandomUID,Chefid;
 
-    public FoodDetails(String dishes, String amount, String price, String description, String imageURL, String randomUID, String chefid) {
+    public String Dishes,Quantity,Price,Description,ImageURL,RandomUID,Chefid;
+    // Alt+insert
+
+    public FoodDetails(String dishes, String quantity, String price, String description, String imageURL, String randomUID, String chefid) {
         Dishes = dishes;
-        Amount = amount;
+        Quantity = quantity;
         Price = price;
         Description = description;
         ImageURL = imageURL;

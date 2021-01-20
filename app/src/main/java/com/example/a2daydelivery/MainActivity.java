@@ -23,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
-
     ImageView imageView;
     TextView textView;
     FirebaseAuth Fauth;
@@ -72,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
                                     finish();
 
                                 }
-                                if(role.equals("Custommer")) {
-                                    startActivity(new Intent(MainActivity.this, CustomerFoodPanelNavigation.class));
+                                if(role.equals("Customer")){
+                                    startActivity(new Intent(MainActivity.this,CustomerFoodPanelNavigation.class));
                                     finish();
 
                                 }
@@ -81,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(new Intent(MainActivity.this, ShipperFoodPanel_BottomNavigation.class));
                                     finish();
                                 }
-//                                Intent intent = new Intent(MainActivity.this, MainMenu.class);
-//                                startActivity(intent);
-//                                finish();
+
 
                             }
 

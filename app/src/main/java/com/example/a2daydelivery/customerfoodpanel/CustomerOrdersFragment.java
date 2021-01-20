@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.a2daydelivery.R;
 
+
 public class CustomerOrdersFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_customerorders, null);
+        View v = inflater.inflate(R.layout.fragment_customerorders,null);
         getActivity().setTitle("Orders");
-        return view;
+        return v;
     }
 }
