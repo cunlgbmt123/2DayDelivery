@@ -3,7 +3,7 @@ package com.example.a2daydelivery.customerfoodpanel;
 public class Item {
     private int id;
     private String name,price;
-    private boolean isAddtocard;
+    private boolean isAddtocard,isChecked;
 
     public Item(int id, String name, String price) {
         this.id = id;
@@ -42,5 +42,13 @@ public class Item {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

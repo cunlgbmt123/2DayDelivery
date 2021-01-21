@@ -7,7 +7,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,18 +22,207 @@ import androidx.fragment.app.Fragment;
 import com.example.a2daydelivery.MainMenu;
 import com.example.a2daydelivery.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class CustomerProfileFragment extends Fragment {
-    LinearLayout LogOut;
+    String[] HN = {"Ba Đình", "BTL", "Cầu Giấy", "Đống Đa", "Hà Đông", "HBT", "Hoàn Kiếm", "Hoàng Mai", "Long Biên", "NTL", "Thanh Xuân", "Tây Hồ"};
+    String[] HCM = {"Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Quận Bình Tân", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú", "Quận Thủ Đức"};
+
+
+    EditText firstname, lastname, address;
+    Spinner State, City, Suburban;
+    TextView mobileno, Email;
+    Button Update;
+    LinearLayout password, LogOut;
+    DatabaseReference databaseReference, data;
+    FirebaseDatabase firebaseDatabase;
+    String statee, cityy, suburban, email, passwordd, confirmpass;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View v = inflater.inflate(R.layout.fragment_customerprofile, null);
-        LogOut = (LinearLayout) v.findViewById(R.id.logout_layout);
         getActivity().setTitle("Profile");
+        View v = inflater.inflate(R.layout.fragment_customerprofile, null);
+
+        firstname = (EditText) v.findViewById(R.id.fnamee);
+        lastname = (EditText) v.findViewById(R.id.lnamee);
+        address = (EditText) v.findViewById(R.id.address);
+        Email = (TextView) v.findViewById(R.id.emailID);
+        State = (Spinner) v.findViewById(R.id.statee);
+        City = (Spinner) v.findViewById(R.id.cityy);
+        Suburban = (Spinner) v.findViewById(R.id.sub);
+        mobileno = (TextView) v.findViewById(R.id.mobilenumber);
+        Update = (Button) v.findViewById(R.id.update);
+        password = (LinearLayout) v.findViewById(R.id.passwordlayout);
+        LogOut = (LinearLayout) v.findViewById(R.id.logout_layout);
+
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Customer").child(userid);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                final Customer customer = dataSnapshot.getValue(Customer.class);
+
+                firstname.setText(customer.getFname());
+                lastname.setText(customer.getLname());
+                address.setText(customer.getHouse());
+                mobileno.setText(customer.getMobile());
+                Email.setText(customer.getEmailid());
+                State.setSelection(getIndexByString(State, customer.getState()));
+                State.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Object value = parent.getItemAtPosition(position);
+                        statee = value.toString().trim();
+                        if (statee.equals("HN")) {
+                            ArrayList<String> list = new ArrayList<>();
+                            for (String text : HN) {
+                                list.add(text);
+                            }
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
+                            City.setAdapter(arrayAdapter);
+                        }
+                        if (statee.equals("HCM")) {
+                            ArrayList<String> list = new ArrayList<>();
+                            for (String text : HCM) {
+                                list.add(text);
+                            }
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, list);
+
+                            City.setAdapter(arrayAdapter);
+                        }
+                        City.setSelection(getIndexByString(City, customer.getCity()));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                State.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Object value = parent.getItemAtPosition(position);
+                        cityy = value.toString().trim();
+                        if (cityy.equals("HN")) {
+                            ArrayList<String> listt = new ArrayList<>();
+                            for (String text : HN) {
+                                listt.add(text);
+                            }
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, listt);
+                            Suburban.setAdapter(arrayAdapter);
+                        }
+
+                        if (cityy.equals("HCM")) {
+                            ArrayList<String> listt = new ArrayList<>();
+                            for (String text :HCM) {
+                                listt.add(text);
+                            }
+                            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, listt);
+                            Suburban.setAdapter(arrayAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
+                Suburban.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Object value = parent.getItemAtPosition(position);
+                        suburban = value.toString().trim();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        updateinformation();
+        return v;
+    }
+
+    private void updateinformation() {
+
+
+        Update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                data = FirebaseDatabase.getInstance().getReference("Customer").child(useridd);
+                data.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Customer customer = dataSnapshot.getValue(Customer.class);
+
+
+                        confirmpass = customer.getConfirmPassword();
+                        email = customer.getEmailid();
+                        passwordd = customer.getPassword();
+                        long mobilenoo = Long.parseLong(customer.getMobile());
+
+                        String Fname = firstname.getText().toString().trim();
+                        String Lname = lastname.getText().toString().trim();
+                        String Address = address.getText().toString().trim();
+
+                        HashMap<String, String> hashMappp = new HashMap<>();
+                        hashMappp.put("City", cityy);
+                        hashMappp.put("ConfirmPassword", confirmpass);
+                        hashMappp.put("EmailID", email);
+                        hashMappp.put("FirstName", Fname);
+                        hashMappp.put("LastName", Lname);
+                        hashMappp.put("Mobileno", String.valueOf(mobilenoo));
+                        hashMappp.put("Password", passwordd);
+                        hashMappp.put("LocalAddress", Address);
+                        hashMappp.put("State", statee);
+                        hashMappp.put("Suburban", suburban);
+                        firebaseDatabase.getInstance().getReference("Customer").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(hashMappp);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+            }
+        });
+
+        password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        mobileno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         LogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +254,18 @@ public class CustomerProfileFragment extends Fragment {
 
 
             }
-
         });
-        return v;
+
+    }
+
+    private int getIndexByString(Spinner st, String spist) {
+        int index = 0;
+        for (int i = 0; i < st.getCount(); i++) {
+            if (st.getItemAtPosition(i).toString().equalsIgnoreCase(spist)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

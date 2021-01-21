@@ -3,6 +3,7 @@ package com.example.a2daydelivery.customerfoodpanel;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,13 +68,16 @@ public void setData(List<Item> List,Clickaddtocard listener){
 
     public class dishView extends RecyclerView.ViewHolder{
         private TextView name, price;
+        private CheckBox checkBox;
         ImageView imageView,card;
         public dishView(@NonNull View itemView) {
             super(itemView);
                 imageView = itemView.findViewById(R.id.menu_image);
                 card = itemView.findViewById(R.id.addtocard);
+                checkBox = itemView.findViewById(R.id.checkbox1);
                 name = itemView.findViewById(R.id.dishname);
                 price = itemView.findViewById(R.id.dishprice);
+
         }
     }
 }

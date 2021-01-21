@@ -360,7 +360,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:maxWidth="300dp"
-                        android:text="State"
+                        android:text="City"
                         android:textColor="@color/Blacklogo"
                         android:textSize="16dp" />
 
@@ -410,7 +410,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:maxWidth="300dp"
-                        android:text="City"
+                        android:text="District"
                         android:textColor="@color/Blacklogo"
                         android:textSize="16dp" />
 
@@ -456,7 +456,7 @@
 
 
                     <TextView
-                        android:id="@+id/Ward"
+                        android:id="@+id/suburb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -472,7 +472,7 @@
 
 
                         <Spinner
-                            android:id="@+id/ward"
+                            android:id="@+id/sub"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"

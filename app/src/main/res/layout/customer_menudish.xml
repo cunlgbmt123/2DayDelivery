@@ -68,6 +68,10 @@
                     android:background="@drawable/btnred"
                     android:src="@drawable/ic_baseline_shopping_cart_24"
                     />.
+                <CheckBox
+                    android:id="@+id/checkbox1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
 
 
 

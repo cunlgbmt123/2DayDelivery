@@ -21,14 +21,12 @@ public class CustomerHomeFragment extends Fragment {
     private RecyclerView rcvItem;
     private View mview;
     private Adapter adapter;
-
     public CustomerHomeFragment() {
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         mview = inflater.inflate(R.layout.fragment_customerhome, container, false);
         this.getActivity().setTitle("Home");
         customerFoodPanelNavigation = (CustomerFoodPanelNavigation) getActivity();
@@ -51,7 +49,10 @@ public class CustomerHomeFragment extends Fragment {
                     public void onAnimationEnd(android.view.animation.Animation animation) {
                         item.setAddtocard(true);
                         imgaddtocard.setBackgroundResource(R.color.gray);
+
                         adapter.notifyDataSetChanged();
+
+
                     }
 
                     @Override
@@ -69,13 +70,13 @@ public class CustomerHomeFragment extends Fragment {
     private List<Item> getListItem(){
         List<Item> list = new ArrayList<>();
         list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
-        list.add(new Item(R.drawable.pancako, "Pancako", "6000vnd/one"));
+        list.add(new Item(R.drawable.bunbo, "Nudle Beef", "60000vnd/one"));
+        list.add(new Item(R.drawable.banhday, "RiceTic", "16000vnd/one"));
+        list.add(new Item(R.drawable.chagio, "Roll", "6000vnd/one"));
+        list.add(new Item(R.drawable.haisan, "Sea Food", "80000vnd/one"));
+        list.add(new Item(R.drawable.phobo, "Pho", "60000vnd/one"));
+        list.add(new Item(R.drawable.chagio, "Ptoto", "6000vnd/one"));
+        list.add(new Item(R.drawable.pancako, "Piza", "6000vnd/one"));
 
         return list;
     }

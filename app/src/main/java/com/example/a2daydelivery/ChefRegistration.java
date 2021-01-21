@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ChefRegistration extends AppCompatActivity {
-    String[] Maharashtra = {"Mumbai","Pune","Nashik"};
-    String[] Madhyapradesh = {"Bhopal","Indore","Ujjain"};
+    String[] HN = {"Ba Đình", "BTL", "Cầu Giấy", "Đống Đa", "Hà Đông", "HBT", "Hoàn Kiếm", "Hoàng Mai", "Long Biên", "NTL", "Thanh Xuân", "Tây Hồ"};
+    String[] HCM = {"Quận 1", "Quận 2", "Quận 3", "Quận 4", "Quận 5", "Quận 6", "Quận 7", "Quận 8", "Quận 9", "Quận 10", "Quận 11", "Quận 12", "Quận Bình Tân", "Quận Bình Thạnh", "Quận Gò Vấp", "Quận Phú Nhuận", "Quận Tân Bình", "Quận Tân Phú", "Quận Thủ Đức"};
 
     TextInputLayout Fname,Lname,Email,Pass,cpass,mobileno,houseno,area,pincode;
     Spinner Statespin,Cityspin;
@@ -70,17 +70,17 @@ public class ChefRegistration extends AppCompatActivity {
 
                 Object value = parent.getItemAtPosition(position);
                 statee = value.toString().trim();
-                if(statee.equals("Maharashtra")){
+                if(statee.equals("HN")){
                     ArrayList<String> list = new ArrayList<>();
-                    for (String cities : Maharashtra){
+                    for (String cities : HN){
                         list.add(cities);
                     }
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ChefRegistration.this,android.R.layout.simple_spinner_item,list);
                     Cityspin.setAdapter(arrayAdapter);
                 }
-                if(statee.equals("Madhyapradesh")){
+                if(statee.equals("HCM")){
                     ArrayList<String> list = new ArrayList<>();
-                    for (String cities : Madhyapradesh){
+                    for (String cities : HCM){
                         list.add(cities);
                     }
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ChefRegistration.this,android.R.layout.simple_spinner_item,list);
@@ -151,11 +151,11 @@ public class ChefRegistration extends AppCompatActivity {
                                         hashMap1.put("First Name",fname);
                                         hashMap1.put("Last Name",lname);
                                         hashMap1.put("EmailId",emailid);
-                                        hashMap1.put("City",cityy);
-                                        hashMap1.put("Area",Area);
+                                        hashMap1.put("district",cityy);
+                                        hashMap1.put("Ward",Area);
                                         hashMap1.put("Password",password);
-                                        hashMap1.put("Pincode",Pincode);
-                                        hashMap1.put("State",statee);
+                                        hashMap1.put("CvID",Pincode);
+                                        hashMap1.put("City",statee);
                                         hashMap1.put("Confirm Password",confpassword);
                                         hashMap1.put("House",house);
 
