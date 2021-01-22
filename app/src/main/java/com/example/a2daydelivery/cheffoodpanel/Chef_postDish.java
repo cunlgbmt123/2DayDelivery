@@ -57,7 +57,7 @@ public class Chef_postDish extends AppCompatActivity {
     StorageReference ref;
     String ChefId;
     String RandomUId;
-    String State, City, Area;
+    String District, City, Ward;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +72,7 @@ public class Chef_postDish extends AppCompatActivity {
         pri = (TextInputLayout) findViewById(R.id.price);
         post_dish = (Button) findViewById(R.id.post);
         FAuth = FirebaseAuth.getInstance();
-        databaseReference = firebaseDatabase.getInstance().getReference("FoodSupplyDetails");
+        databaseReference = firebaseDatabase.getInstance().getReference("FoodDetail");
 
         try {
             String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -81,10 +81,10 @@ public class Chef_postDish extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Chef chefc = dataSnapshot.getValue(Chef.class);
-                    State = chefc.getState();
+                    District = chefc.getDistrict();
                     City = chefc.getCity();
-                    Area = chefc.getArea();
-                    imageButton = (ImageButton) findViewById(R.id.image_upload);
+                    Ward = chefc.getWard();
+                    imageButton = (ImageButton) findViewById(R.id.imageupload);
                     imageButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -173,7 +173,7 @@ public class Chef_postDish extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             FoodDetails info = new FoodDetails(dishes, quantity, price, description, String.valueOf(uri), RandomUId, ChefId);
-                            firebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Area).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUId)
+                            firebaseDatabase.getInstance().getReference("FoodDetail").child(District).child(City).child(Ward).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUId)
                                     .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -232,7 +232,7 @@ public class Chef_postDish extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
-                ((ImageButton) findViewById(R.id.image_upload)).setImageURI(result.getUri());
+                ((ImageButton) findViewById(R.id.imageupload)).setImageURI(result.getUri());
                 Toast.makeText(this, "Cropped Successfully", Toast.LENGTH_SHORT).show();
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Toast.makeText(this, "Cropping failed" + result.getError(), Toast.LENGTH_SHORT).show();
@@ -265,5 +265,3 @@ public class Chef_postDish extends AppCompatActivity {
 
     }
 }
-
-

@@ -2,13 +2,10 @@ package com.example.a2daydelivery.cheffoodpanel;
 
 public class Chef {
 
-    private String Area, City, ConfirmPassword, Emailid, Fname, House, Lname, Mobile, Password, Postcode, State;
+    private String Ward, City, ConfirmPassword, Emailid, Fname, House, Lname, Mobile, Password, Postcode, District;
 
-
-
-
-    public Chef(String area, String city, String confirmPassword, String emailid, String fname, String house, String lname, String mobile, String password, String postcode, String state) {
-        this.Area = area;
+    public Chef(String ward, String city, String confirmPassword, String emailid, String fname, String house, String lname, String mobile, String password, String postcode, String district) {
+        this.Ward = ward;
         City = city;
         ConfirmPassword = confirmPassword;
         Emailid = emailid;
@@ -18,13 +15,13 @@ public class Chef {
         Mobile = mobile;
         Password = password;
         Postcode = postcode;
-        State = state;
+        District = district;
     }
-    public Chef() {
-    }
+    public Chef(){
 
-    public String getArea() {
-        return Area;
+    }
+    public String getWard() {
+        return Ward;
     }
 
     public String getCity() {
@@ -63,7 +60,7 @@ public class Chef {
         return Postcode;
     }
 
-    public String getState() {
-        return State;
+    public String getDistrict() {
+        return District;
     }
 }

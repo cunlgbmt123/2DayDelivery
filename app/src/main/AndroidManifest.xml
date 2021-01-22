@@ -9,7 +9,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".customerfoodpanel.OrderDish"></activity>
+        <activity android:name=".customerfoodpanel.Order"></activity>
+        <activity android:name=".customerfoodpanel.Cardview" />
+        <activity android:name=".customerfoodpanel.OrderDish" />
         <activity android:name=".Shipper_sendotp" />
         <activity android:name=".Shipper_verifyphone" />
         <activity android:name=".cheffoodpanel.UpdateDelete_Dish" />

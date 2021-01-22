@@ -63,11 +63,11 @@ public class UpdateDelete_Dish extends AppCompatActivity {
     String ID;
     private ProgressDialog progressDialog;
     DatabaseReference dataaa;
-    String State, City, Area;
+    String District, City, Ward;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceDistrict) {
+        super.onCreate(savedInstanceDistrict);
         setContentView(R.layout.activity_update_delete__dish);
 
         desc = (TextInputLayout) findViewById(R.id.description);
@@ -85,9 +85,9 @@ public class UpdateDelete_Dish extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Chef chefc = dataSnapshot.getValue(Chef.class);
-                State = chefc.getState();
+                District = chefc.getDistrict();
                 City = chefc.getCity();
-                Area = chefc.getArea();
+                Ward = chefc.getWard();
 
                 Update_dish.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -118,7 +118,7 @@ public class UpdateDelete_Dish extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                firebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Area).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID).removeValue();
+                                firebaseDatabase.getInstance().getReference("FoodDetail").child(District).child(City).child(Ward).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID).removeValue();
 
                                 AlertDialog.Builder food = new AlertDialog.Builder(UpdateDelete_Dish.this);
                                 food.setMessage("Your Dish has been Deleted");
@@ -149,7 +149,7 @@ public class UpdateDelete_Dish extends AppCompatActivity {
 
                 String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 progressDialog = new ProgressDialog(UpdateDelete_Dish.this);
-                databaseReference = FirebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Area).child(useridd).child(ID);
+                databaseReference = FirebaseDatabase.getInstance().getReference("FoodDetail").child(District).child(City).child(Ward).child(useridd).child(ID);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -173,7 +173,7 @@ public class UpdateDelete_Dish extends AppCompatActivity {
 
 
                 FAuth = FirebaseAuth.getInstance();
-                databaseReference = firebaseDatabase.getInstance().getReference("FoodSupplyDetails");
+                databaseReference = firebaseDatabase.getInstance().getReference("FoodDetail");
                 storage = FirebaseStorage.getInstance();
                 storageReference = storage.getReference();
                 imageButton.setOnClickListener(new View.OnClickListener() {
@@ -268,7 +268,7 @@ public class UpdateDelete_Dish extends AppCompatActivity {
     private void updatedesc(String uri) {
         ChefId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FoodDetails info = new FoodDetails(dishes, quantity, price, description, uri, ID, ChefId);
-        firebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(State).child(City).child(Area)
+        firebaseDatabase.getInstance().getReference("FoodSupplyDetails").child(District).child(City).child(Ward)
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID)
                 .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

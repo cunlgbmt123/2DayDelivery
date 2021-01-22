@@ -60,24 +60,29 @@ public class Cheflogin extends AppCompatActivity {
                         Fauth.signInWithEmailAndPassword(emailid,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+                                try {
 
-                                if(task.isSuccessful()){
-                                    mDialog.dismiss();
-
-                                    if(Fauth.getCurrentUser().isEmailVerified()){
+                                    if (task.isSuccessful()) {
                                         mDialog.dismiss();
-                                        Toast.makeText(Cheflogin.this, "Congratulation! You Have Successfully Login", Toast.LENGTH_SHORT).show();
-                                        Intent Z = new Intent(Cheflogin.this,ChefFoodPanel_BottomNavigation.class);
-                                        startActivity(Z);
-                                        finish();
 
-                                    }else{
-                                        ReusableCodeForAll.ShowAlert(Cheflogin.this,"Verification Failed","You Have Not Verified Your Email");
+                                        if (Fauth.getCurrentUser().isEmailVerified()) {
+                                            mDialog.dismiss();
+                                            Toast.makeText(Cheflogin.this, "Congratulation! You Have Successfully Login", Toast.LENGTH_SHORT).show();
+                                            Intent Z = new Intent(Cheflogin.this, ChefFoodPanel_BottomNavigation.class);
+                                            startActivity(Z);
+                                            finish();
 
+                                        } else {
+                                            ReusableCodeForAll.ShowAlert(Cheflogin.this, "Verification Failed", "You Have Not Verified Your Email");
+
+                                        }
                                     }
-                                }else{
+                                }
+                                catch (Exception e) {
+
                                     mDialog.dismiss();
-                                    ReusableCodeForAll.ShowAlert(Cheflogin.this,"Error",task.getException().getMessage());
+                                    ReusableCodeForAll.ShowAlert(Cheflogin.this, "Error", task.getException().getMessage());
+                                    e.printStackTrace();
                                 }
                             }
                         });

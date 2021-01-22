@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/img3"
-    tools:context=".ChefFoodPanel_BottomNavigation">
+    tools:context=".CustomerFoodPanelNavigation">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-
+                        android:id="@+id/mon1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pancako"
@@ -68,7 +68,7 @@
 
 
                         <TextView
-
+                            android:id="@+id/gia1"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:text="6000vnd"
@@ -85,7 +85,7 @@
                             android:background="@drawable/btnred"
                             android:src="@drawable/ic_baseline_shopping_cart_24" />
                         <CheckBox
-
+                            android:id="@+id/checkbox1"
                             android:layout_width="50dp"
                             android:layout_height="50dp"/>
 
@@ -120,7 +120,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-
+                        android:id="@+id/mon2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nudle Beef"
@@ -139,7 +139,7 @@
 
 
                         <TextView
-
+                            android:id="@+id/gia2"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:text="60000vnd"
@@ -157,7 +157,7 @@
                             android:src="@drawable/ic_baseline_shopping_cart_24"
                             />
                         <CheckBox
-
+                            android:id="@+id/checkbox2"
                             android:layout_width="50dp"
                             android:layout_height="50dp"/>
 
@@ -194,7 +194,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-
+                        android:id="@+id/mon3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="RiceTic"
@@ -213,7 +213,7 @@
 
 
                         <TextView
-
+                            android:id="@+id/gia3"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:text="16000"
@@ -231,7 +231,7 @@
                             android:src="@drawable/ic_baseline_shopping_cart_24"
                             />.
                         <CheckBox
-
+                            android:id="@+id/checkbox3"
                             android:layout_width="50dp"
                             android:layout_height="50dp"/>
 
@@ -268,7 +268,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-
+                        android:id="@+id/mon4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Roll"
@@ -287,7 +287,7 @@
 
 
                         <TextView
-
+                            android:id="@+id/gia4"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:text="6000"
@@ -305,7 +305,7 @@
                             android:src="@drawable/ic_baseline_shopping_cart_24"
                             />.
                         <CheckBox
-
+                            android:id="@+id/checkbox4"
                             android:layout_width="50dp"
                             android:layout_height="50dp"/>
 
@@ -319,8 +319,19 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/Card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card"
+                android:background="@drawable/btnblueish"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="60dp"/>
+
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

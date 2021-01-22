@@ -1,6 +1,5 @@
 package com.example.a2daydelivery;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +7,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -95,6 +95,7 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+
     }
 
     @Override
@@ -102,4 +103,5 @@ public class MainMenu extends AppCompatActivity {
         super.onDestroy();
         System.gc();
     }
+
 }
